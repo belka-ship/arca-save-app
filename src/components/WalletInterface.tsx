@@ -140,7 +140,7 @@ export const WalletInterface: React.FC = () => {
           justifyContent: 'center',
           height: '100%',
           width: '100%',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#FFFBF0',
         }}
       >
         <LoadingSpinner size="large" />
@@ -160,7 +160,7 @@ export const WalletInterface: React.FC = () => {
           justifyContent: 'center',
           height: '100%',
           width: '100%',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#FFFBF0',
           position: 'relative',
         }}
       >

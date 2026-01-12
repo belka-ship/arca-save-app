@@ -38,7 +38,7 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -60,7 +60,7 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
         >
           ✕
         </button>
-        <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0 }}>Withdraw</h2>
+        <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#000000' }}>Withdraw</h2>
         <div style={{ width: '40px' }} />
       </div>
 
@@ -131,7 +131,7 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
           fontSize: '18px',
           fontWeight: '600',
           color: '#FFFFFF',
-          backgroundColor: amount && parseFloat(amount) > 0 ? '#000000' : '#CCCCCC',
+          backgroundColor: amount && parseFloat(amount) > 0 ? 'rgb(32 78 65)' : '#E5E5E5',
           border: 'none',
           borderRadius: '28px',
           cursor: amount && parseFloat(amount) > 0 ? 'pointer' : 'not-allowed',

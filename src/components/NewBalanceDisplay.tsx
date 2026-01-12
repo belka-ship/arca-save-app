@@ -34,7 +34,7 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
         <span style={{ fontSize: '16px', color: '#666666' }}>
           {formatUSD(earnedAmount)}
         </span>
-        <span style={{ fontSize: '16px', color: '#4ADE80', marginLeft: '4px' }}>
+        <span style={{ fontSize: '16px', color: 'rgb(32 78 65)', marginLeft: '4px' }}>
           earned
         </span>
       </div>
@@ -59,48 +59,10 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             marginTop: '12px',
           }}
         >
-          365d avg. rate <strong>7.6% APY</strong>
+          Current rate: <strong>5.5% APY</strong>
         </div>
       </div>
 
-      {/* Details button */}
-      <button
-        style={{
-          padding: '12px 32px',
-          fontSize: '16px',
-          color: '#000000',
-          backgroundColor: '#F5F5F5',
-          border: 'none',
-          borderRadius: '24px',
-          cursor: 'pointer',
-          fontWeight: '500',
-        }}
-      >
-        Details
-      </button>
-
-      {/* Promo card */}
-      <div
-        style={{
-          width: '100%',
-          padding: '20px',
-          backgroundColor: '#F5F5F5',
-          borderRadius: '16px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div>
-          <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '4px' }}>
-            Earn a 30 day 1% APY boost
-          </div>
-          <div style={{ fontSize: '14px', color: '#666666' }}>
-            Deposit $1,000 or more
-          </div>
-        </div>
-        <div style={{ fontSize: '32px' }}>💰</div>
-      </div>
 
       {/* Action buttons */}
       <div
@@ -139,15 +101,15 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             padding: '18px',
             fontSize: '18px',
             fontWeight: '600',
-            color: '#000000',
-            backgroundColor: '#4ADE80',
+            color: '#FFFFFF',
+            backgroundColor: 'rgb(32 78 65)',
             border: 'none',
             borderRadius: '28px',
             cursor: 'pointer',
             transition: 'background-color 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#3BC970')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#4ADE80')}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgb(25 65 53)')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgb(32 78 65)')}
         >
           Deposit
         </button>

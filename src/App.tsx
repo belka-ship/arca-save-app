@@ -32,10 +32,10 @@ const App: React.FC = () => {
             onClick={login}
             style={styles.loginButton}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#3BC970'
+              e.currentTarget.style.backgroundColor = 'rgb(25 65 53)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#4ADE80'
+              e.currentTarget.style.backgroundColor = 'rgb(32 78 65)'
             }}
           >
             Get Started
@@ -57,7 +57,7 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFBF0',
     padding: '20px',
   },
   loginContainer: {
@@ -84,8 +84,8 @@ const styles: Record<string, React.CSSProperties> = {
     padding: '14px 32px',
     fontSize: '16px',
     fontWeight: '600',
-    color: '#000000',
-    backgroundColor: '#4ADE80',
+    color: '#FFFFFF',
+    backgroundColor: 'rgb(32 78 65)',
     border: 'none',
     borderRadius: '24px',
     cursor: 'pointer',

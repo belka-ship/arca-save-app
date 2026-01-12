@@ -31,7 +31,7 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -55,7 +55,7 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
         >
           ✕
         </button>
-        <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0 }}>Withdraw</h2>
+        <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#000000' }}>Withdraw</h2>
         <div style={{ width: '40px' }} />
       </div>
 
@@ -142,7 +142,7 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
           fontSize: '18px',
           fontWeight: '600',
           color: '#FFFFFF',
-          backgroundColor: isValidAddress && !isProcessing ? '#000000' : '#CCCCCC',
+          backgroundColor: isValidAddress && !isProcessing ? 'rgb(32 78 65)' : '#E5E5E5',
           border: 'none',
           borderRadius: '28px',
           cursor: isValidAddress && !isProcessing ? 'pointer' : 'not-allowed',

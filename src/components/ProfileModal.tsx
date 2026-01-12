@@ -39,7 +39,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',

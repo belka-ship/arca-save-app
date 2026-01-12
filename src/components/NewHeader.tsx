@@ -52,8 +52,8 @@ export const NewHeader: React.FC<NewHeaderProps> = ({ onProfileClick }) => {
         style={{
           padding: '8px 16px',
           fontSize: '14px',
-          color: '#000000',
-          backgroundColor: '#F5F5F5',
+          color: '#FFFFFF',
+          backgroundColor: 'rgb(32 78 65)',
           border: 'none',
           borderRadius: '20px',
           cursor: 'pointer',

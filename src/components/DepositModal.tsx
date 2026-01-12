@@ -30,7 +30,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -106,7 +106,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: copied ? '#4ADE80' : '#666666',
+              color: copied ? 'rgb(32 78 65)' : '#666666',
             }}
           >
             <svg
@@ -208,7 +208,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
           fontSize: '18px',
           fontWeight: '600',
           color: '#FFFFFF',
-          backgroundColor: '#000000',
+          backgroundColor: 'rgb(32 78 65)',
           border: 'none',
           borderRadius: '28px',
           cursor: 'pointer',

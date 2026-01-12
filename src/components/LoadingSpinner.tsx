@@ -23,7 +23,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = React.memo(
           width: pixelSize,
           height: pixelSize,
           border: '2px solid #E5E5E5',
-          borderTopColor: '#000000',
+          borderTopColor: 'rgb(32 78 65)',
           borderRadius: '50%',
           animation: 'spin 0.8s linear infinite',
           display: 'inline-block',
