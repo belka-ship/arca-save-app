@@ -49,13 +49,13 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
             border: 'none',
             cursor: isProcessing ? 'not-allowed' : 'pointer',
             fontSize: '24px',
-            color: '#000000',
+            color: '#0A0A0A',
             opacity: isProcessing ? 0.5 : 1,
           }}
         >
           ✕
         </button>
-        <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#000000' }}>Withdraw</h2>
+        <h2 style={{ fontSize: '20px', fontWeight: 600, margin: 0, color: '#0A0A0A' }}>Withdraw</h2>
         <div style={{ width: '40px' }} />
       </div>
 
@@ -72,10 +72,10 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
       >
         {/* Amount display */}
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '14px', color: '#666666', marginBottom: '8px' }}>
+          <div style={{ fontSize: '14px', color: '#404040', marginBottom: '8px' }}>
             Withdrawing
           </div>
-          <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#000000' }}>
+          <div style={{ fontSize: '48px', fontWeight: 700, color: '#0A0A0A', letterSpacing: '-1px' }}>
             ${amount}
           </div>
         </div>
@@ -86,8 +86,8 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
             style={{
               display: 'block',
               fontSize: '14px',
-              fontWeight: '500',
-              color: '#000000',
+              fontWeight: 500,
+              color: '#0A0A0A',
               marginBottom: '8px',
             }}
           >
@@ -104,15 +104,18 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
               padding: '16px',
               fontSize: '16px',
               fontFamily: 'monospace',
-              color: '#000000',
-              backgroundColor: '#F5F5F5',
-              border: 'none',
+              color: '#0A0A0A',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              border: '1px solid #D4D4D4',
               borderRadius: '12px',
               outline: 'none',
+              transition: 'border-color 0.2s',
             }}
+            onFocus={(e) => (e.currentTarget.style.borderColor = '#204E41')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#D4D4D4')}
           />
           {address && !isValidAddress && (
-            <div style={{ fontSize: '12px', color: '#EF4444', marginTop: '8px' }}>
+            <div style={{ fontSize: '12px', color: '#dc2626', marginTop: '8px' }}>
               Please enter a valid Ethereum address
             </div>
           )}
@@ -138,14 +141,21 @@ export const WithdrawAddressModal: React.FC<WithdrawAddressModalProps> = ({
         disabled={!isValidAddress || isProcessing}
         style={{
           width: '100%',
-          padding: '18px',
-          fontSize: '18px',
-          fontWeight: '600',
+          padding: '16px',
+          fontSize: '16px',
+          fontWeight: 500,
           color: '#FFFFFF',
-          backgroundColor: isValidAddress && !isProcessing ? 'rgb(32 78 65)' : '#E5E5E5',
+          backgroundColor: isValidAddress && !isProcessing ? '#204E41' : '#a8a29e',
           border: 'none',
-          borderRadius: '28px',
+          borderRadius: '12px',
           cursor: isValidAddress && !isProcessing ? 'pointer' : 'not-allowed',
+          transition: 'background-color 0.2s',
+        }}
+        onMouseEnter={(e) => {
+          if (isValidAddress && !isProcessing) e.currentTarget.style.backgroundColor = '#1a3f35'
+        }}
+        onMouseLeave={(e) => {
+          if (isValidAddress && !isProcessing) e.currentTarget.style.backgroundColor = '#204E41'
         }}
       >
         {isProcessing ? 'Processing...' : 'Withdraw'}

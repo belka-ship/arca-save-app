@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { formatUSD } from '../utils/formatters'
+import { formatUSD, formatEarnings } from '../utils/formatters'
+import { useEarningsTicker } from '../hooks/useEarningsTicker'
 
 const RefreshIcon: React.FC<{ spinning?: boolean }> = ({ spinning }) => (
   <svg
@@ -31,13 +32,22 @@ interface NewBalanceDisplayProps {
 
 export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
   totalValueUSD,
-  earnedAmount,
+  earnedAmount: _earnedAmount,
   isLoading,
   onDeposit,
   onWithdraw,
   onRefresh,
 }) => {
   const [isRefreshing, setIsRefreshing] = useState(false)
+  
+  // Use live earnings ticker with 7.4% APY
+  const liveEarnings = useEarningsTicker(totalValueUSD, 7.4)
+  
+  // Debug log to see the earnings value
+  console.log('NewBalanceDisplay - totalValueUSD:', totalValueUSD.toString(), 'liveEarnings:', liveEarnings.toString())
+  
+  // Test formatting with a manual small value
+  console.log('Test formatEarnings with small value:', formatEarnings(BigInt(1000))) // Should show $0.001
 
   const handleRefresh = async () => {
     if (isRefreshing || isLoading) return
@@ -63,10 +73,10 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
     >
       {/* Earned amount */}
       <div style={{ textAlign: 'center' }}>
-        <span style={{ fontSize: '16px', color: '#666666' }}>
-          {formatUSD(earnedAmount)}
+        <span style={{ fontSize: '16px', color: '#204E41', fontWeight: 500 }}>
+          {formatEarnings(liveEarnings)}
         </span>
-        <span style={{ fontSize: '16px', color: '#000000', marginLeft: '4px' }}>
+        <span style={{ fontSize: '16px', color: '#404040', marginLeft: '4px' }}>
           earned
         </span>
       </div>
@@ -84,8 +94,8 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
           <div
             style={{
               fontSize: '72px',
-              fontWeight: 'bold',
-              color: '#000000',
+              fontWeight: 700,
+              color: '#0A0A0A',
               letterSpacing: '-2px',
               lineHeight: '1',
             }}
@@ -101,7 +111,7 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
               border: 'none',
               borderRadius: '50%',
               cursor: isRefreshing || isLoading ? 'not-allowed' : 'pointer',
-              color: '#666666',
+              color: '#a8a29e',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -110,12 +120,12 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             }}
             onMouseEnter={(e) => {
               if (!isRefreshing && !isLoading) {
-                e.currentTarget.style.color = '#000000'
-                e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'
+                e.currentTarget.style.color = '#204E41'
+                e.currentTarget.style.backgroundColor = 'rgba(32, 78, 65, 0.1)'
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#666666'
+              e.currentTarget.style.color = '#a8a29e'
               e.currentTarget.style.backgroundColor = 'transparent'
             }}
             title="Refresh balance"
@@ -126,11 +136,11 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
         <div
           style={{
             fontSize: '14px',
-            color: '#666666',
+            color: '#404040',
             marginTop: '12px',
           }}
         >
-          Current rate: <strong>5.5% APY</strong>
+          Current rate: <span style={{ fontWeight: 600, color: '#204E41' }}>7.4% APY</span>
         </div>
       </div>
 
@@ -149,18 +159,18 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
           disabled={isLoading}
           style={{
             flex: 1,
-            padding: '18px',
-            fontSize: '18px',
-            fontWeight: '600',
-            color: '#000000',
-            backgroundColor: '#F5F5F5',
+            padding: '16px 24px',
+            fontSize: '16px',
+            fontWeight: 500,
+            color: '#0A0A0A',
+            backgroundColor: '#E8EFE9',
             border: 'none',
-            borderRadius: '28px',
+            borderRadius: '12px',
             cursor: 'pointer',
-            transition: 'background-color 0.2s',
+            transition: 'all 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E5E5E5')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#F5F5F5')}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#d9e5db')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E8EFE9')}
         >
           Withdraw
         </button>
@@ -169,18 +179,18 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
           disabled={isLoading}
           style={{
             flex: 1,
-            padding: '18px',
-            fontSize: '18px',
-            fontWeight: '600',
+            padding: '16px 24px',
+            fontSize: '16px',
+            fontWeight: 500,
             color: '#FFFFFF',
-            backgroundColor: '#000000',
+            backgroundColor: '#204E41',
             border: 'none',
-            borderRadius: '28px',
+            borderRadius: '12px',
             cursor: 'pointer',
-            transition: 'background-color 0.2s',
+            transition: 'all 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#000000')}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1a3f35')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#204E41')}
         >
           Deposit
         </button>

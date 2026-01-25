@@ -16,6 +16,18 @@ export function formatUSD(amount: bigint): string {
 }
 
 /**
+ * Format earnings with many decimal places to show small increments
+ * @param amount - Amount in base units (6 decimals for USDC)
+ * @returns Formatted string like "$0.0001234567"
+ */
+export function formatEarnings(amount: bigint): string {
+  const value = Number(amount) / Math.pow(10, USDC_DECIMALS)
+  
+  // Always show up to 10 decimal places for earnings
+  return `$${value.toFixed(10)}`
+}
+
+/**
  * Truncate an Ethereum address for display
  * @param address - Full address string
  * @returns Truncated string like "0x1234...5678"

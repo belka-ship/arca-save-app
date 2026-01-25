@@ -30,7 +30,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -47,7 +47,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
           border: 'none',
           cursor: 'pointer',
           fontSize: '24px',
-          color: '#000000',
+          color: '#0A0A0A',
         }}
       >
         ✕
@@ -71,9 +71,10 @@ export const DepositModal: React.FC<DepositModalProps> = ({
         <h2
           style={{
             fontSize: '32px',
-            fontWeight: 'bold',
+            fontWeight: 700,
             margin: 0,
-            color: '#000000',
+            color: '#0A0A0A',
+            letterSpacing: '-0.5px',
           }}
         >
           USDC deposit
@@ -86,17 +87,17 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             alignItems: 'center',
             gap: '8px',
             padding: '12px 16px',
-            backgroundColor: copied ? '#E8F5E9' : '#F5F5F5',
+            backgroundColor: copied ? '#E8EFE9' : 'rgba(255, 255, 255, 0.8)',
             borderRadius: '12px',
             transition: 'all 0.3s ease',
-            border: copied ? '1px solid #4CAF50' : '1px solid transparent',
+            border: copied ? '1px solid #204E41' : '1px solid #D4D4D4',
           }}
         >
           <span
             style={{
               fontSize: '16px',
               fontFamily: 'monospace',
-              color: '#000000',
+              color: '#0A0A0A',
             }}
           >
             {truncateAddress(walletAddress)}
@@ -108,7 +109,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: copied ? '#4CAF50' : '#666666',
+              color: copied ? '#204E41' : '#a8a29e',
               transition: 'all 0.2s ease',
               transform: copied ? 'scale(1.1)' : 'scale(1)',
             }}
@@ -149,12 +150,12 @@ export const DepositModal: React.FC<DepositModalProps> = ({
           <div
             style={{
               fontSize: '14px',
-              color: '#4CAF50',
-              fontWeight: '500',
+              color: '#204E41',
+              fontWeight: 500,
               animation: 'fadeIn 0.3s ease',
             }}
           >
-            Address copied to clipboard!
+            Address copied!
           </div>
         )}
 
@@ -174,18 +175,19 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 width: '24px',
                 height: '24px',
                 borderRadius: '50%',
-                border: '2px solid #000000',
+                border: '2px solid #204E41',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
                 fontSize: '14px',
                 fontWeight: 'bold',
+                color: '#204E41',
               }}
             >
               i
             </div>
-            <p style={{ margin: 0, fontSize: '14px', color: '#000000' }}>
+            <p style={{ margin: 0, fontSize: '14px', color: '#404040' }}>
               This address is for depositing USDC on Base network only
             </p>
           </div>
@@ -196,17 +198,18 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 width: '24px',
                 height: '24px',
                 borderRadius: '50%',
-                border: '2px solid #000000',
+                border: '2px solid #dc2626',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
-                fontSize: '18px',
+                fontSize: '14px',
+                color: '#dc2626',
               }}
             >
               ✕
             </div>
-            <p style={{ margin: 0, fontSize: '14px', color: '#000000' }}>
+            <p style={{ margin: 0, fontSize: '14px', color: '#404040' }}>
               Sending tokens on other networks may result in permanent loss
             </p>
           </div>
@@ -225,7 +228,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             >
               ✈️
             </div>
-            <p style={{ margin: 0, fontSize: '14px', color: '#000000' }}>
+            <p style={{ margin: 0, fontSize: '14px', color: '#404040' }}>
               Start with a test-send first
             </p>
           </div>
@@ -237,19 +240,19 @@ export const DepositModal: React.FC<DepositModalProps> = ({
         onClick={onClose}
         style={{
           width: '100%',
-          padding: '18px',
-          fontSize: '18px',
-          fontWeight: '600',
+          padding: '16px',
+          fontSize: '16px',
+          fontWeight: 500,
           color: '#FFFFFF',
-          backgroundColor: '#000000',
+          backgroundColor: '#204E41',
           border: 'none',
-          borderRadius: '28px',
+          borderRadius: '12px',
           cursor: 'pointer',
           marginTop: '32px',
-          transition: 'background-color 0.2s ease',
+          transition: 'all 0.2s ease',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#000000')}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1a3f35')}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#204E41')}
       >
         Close
       </button>

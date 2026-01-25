@@ -24,8 +24,10 @@ const App: React.FC = () => {
     return (
       <div style={styles.container}>
         <div style={styles.loginContainer}>
-          <h1 style={styles.logo}>ArcaSave.</h1>
-          <h2 style={styles.headline}>Earn up to 7.4% APY</h2>
+          <h1 style={styles.logo}>ArcaSave<span style={{ color: '#204E41' }}>.</span></h1>
+          <h2 style={styles.headline}>
+            Earn up to <span style={{ color: '#204E41' }}>7.4%</span> APY
+          </h2>
           <p style={styles.subtitle}>
             Zero fees. No minimum deposit. Withdraw anytime.
           </p>
@@ -33,10 +35,10 @@ const App: React.FC = () => {
             onClick={login}
             style={styles.loginButton}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#1a1a1a'
+              e.currentTarget.style.backgroundColor = '#1a3f35'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#000000'
+              e.currentTarget.style.backgroundColor = '#204E41'
             }}
           >
             Get Started
@@ -58,7 +60,7 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#FAFAFA',
+    backgroundColor: '#FFFBF0',
     padding: '20px',
   },
   loginContainer: {
@@ -72,35 +74,35 @@ const styles: Record<string, React.CSSProperties> = {
     padding: '0 20px',
   },
   logo: {
-    fontSize: '28px',
-    fontWeight: '600',
-    color: '#000000',
+    fontSize: '24px',
+    fontWeight: 600,
+    color: '#0A0A0A',
     margin: 0,
     letterSpacing: '-0.5px',
   },
   headline: {
     fontSize: '48px',
-    fontWeight: '700',
-    color: '#000000',
+    fontWeight: 700,
+    color: '#0A0A0A',
     margin: '24px 0 0 0',
-    letterSpacing: '-1px',
+    letterSpacing: '-1.5px',
     lineHeight: '1.1',
   },
   subtitle: {
     fontSize: '18px',
-    color: '#666666',
+    color: '#404040',
     margin: '8px 0 0 0',
     maxWidth: '320px',
     lineHeight: '1.5',
   },
   loginButton: {
     padding: '16px 48px',
-    fontSize: '18px',
-    fontWeight: '600',
+    fontSize: '16px',
+    fontWeight: 500,
     color: '#FFFFFF',
-    backgroundColor: '#000000',
+    backgroundColor: '#204E41',
     border: 'none',
-    borderRadius: '50px',
+    borderRadius: '12px',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
     marginTop: '24px',

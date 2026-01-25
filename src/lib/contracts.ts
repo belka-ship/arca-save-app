@@ -84,11 +84,40 @@ export const MORPHO_VAULT_ABI = [
     outputs: [{ name: 'shares', type: 'uint256' }],
   },
   {
+    name: 'withdraw',
+    type: 'function',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'assets', type: 'uint256' },
+      { name: 'receiver', type: 'address' },
+      { name: 'owner', type: 'address' },
+    ],
+    outputs: [{ name: 'shares', type: 'uint256' }],
+  },
+  {
+    name: 'redeem',
+    type: 'function',
+    stateMutability: 'nonpayable',
+    inputs: [
+      { name: 'shares', type: 'uint256' },
+      { name: 'receiver', type: 'address' },
+      { name: 'owner', type: 'address' },
+    ],
+    outputs: [{ name: 'assets', type: 'uint256' }],
+  },
+  {
     name: 'convertToAssets',
     type: 'function',
     stateMutability: 'view',
     inputs: [{ name: 'shares', type: 'uint256' }],
     outputs: [{ name: 'assets', type: 'uint256' }],
+  },
+  {
+    name: 'convertToShares',
+    type: 'function',
+    stateMutability: 'view',
+    inputs: [{ name: 'assets', type: 'uint256' }],
+    outputs: [{ name: 'shares', type: 'uint256' }],
   },
   {
     name: 'asset',

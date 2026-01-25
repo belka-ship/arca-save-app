@@ -19,7 +19,7 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -36,7 +36,7 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
           border: 'none',
           cursor: 'pointer',
           fontSize: '24px',
-          color: '#000000',
+          color: '#0A0A0A',
         }}
       >
         ✕
@@ -60,10 +60,11 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
         <h2
           style={{
             fontSize: '32px',
-            fontWeight: 'bold',
+            fontWeight: 700,
             margin: 0,
-            color: '#000000',
+            color: '#0A0A0A',
             textAlign: 'center',
+            letterSpacing: '-0.5px',
           }}
         >
           Deposit
@@ -72,7 +73,7 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
         <p
           style={{
             fontSize: '16px',
-            color: '#666666',
+            color: '#404040',
             margin: 0,
             textAlign: 'center',
           }}
@@ -96,9 +97,9 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
             style={{
               width: '100%',
               padding: '20px',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E5E5E5',
-              borderRadius: '16px',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              border: '1px solid #D4D4D4',
+              borderRadius: '12px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -106,12 +107,12 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
               transition: 'all 0.2s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#000000'
-              e.currentTarget.style.backgroundColor = '#FAFAFA'
+              e.currentTarget.style.borderColor = '#204E41'
+              e.currentTarget.style.backgroundColor = '#E8EFE9'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#E5E5E5'
-              e.currentTarget.style.backgroundColor = '#FFFFFF'
+              e.currentTarget.style.borderColor = '#D4D4D4'
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'
             }}
           >
             <div
@@ -134,14 +135,14 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
               <div
                 style={{
                   fontSize: '18px',
-                  fontWeight: '600',
-                  color: '#000000',
+                  fontWeight: 600,
+                  color: '#0A0A0A',
                   marginBottom: '4px',
                 }}
               >
                 Coinbase
               </div>
-              <div style={{ fontSize: '14px', color: '#666666' }}>
+              <div style={{ fontSize: '14px', color: '#404040' }}>
                 Purchase USDC and transfer
               </div>
             </div>
@@ -150,7 +151,7 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
               height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#666666"
+              stroke="#a8a29e"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -165,9 +166,9 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
             style={{
               width: '100%',
               padding: '20px',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E5E5E5',
-              borderRadius: '16px',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+              border: '1px solid #D4D4D4',
+              borderRadius: '12px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -175,12 +176,12 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
               transition: 'all 0.2s ease',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#000000'
-              e.currentTarget.style.backgroundColor = '#FAFAFA'
+              e.currentTarget.style.borderColor = '#204E41'
+              e.currentTarget.style.backgroundColor = '#E8EFE9'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#E5E5E5'
-              e.currentTarget.style.backgroundColor = '#FFFFFF'
+              e.currentTarget.style.borderColor = '#D4D4D4'
+              e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'
             }}
           >
             <div
@@ -201,14 +202,14 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
               <div
                 style={{
                   fontSize: '18px',
-                  fontWeight: '600',
-                  color: '#000000',
+                  fontWeight: 600,
+                  color: '#0A0A0A',
                   marginBottom: '4px',
                 }}
               >
                 USDC deposit
               </div>
-              <div style={{ fontSize: '14px', color: '#666666' }}>
+              <div style={{ fontSize: '14px', color: '#404040' }}>
                 If you already own USDC
               </div>
             </div>
@@ -217,7 +218,7 @@ export const DepositOptionsModal: React.FC<DepositOptionsModalProps> = ({
               height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#666666"
+              stroke="#a8a29e"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"

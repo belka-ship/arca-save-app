@@ -14,6 +14,12 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
 }) => {
   const [amount, setAmount] = useState('')
 
+  // Convert maxBalance from bigint (6 decimals) to number
+  const maxBalanceNumber = Number(maxBalance) / 1e6
+  const amountNumber = parseFloat(amount) || 0
+  const exceedsBalance = amountNumber > maxBalanceNumber
+  const isValidAmount = amount && amountNumber > 0 && !exceedsBalance
+
   const handleNumberClick = (num: string) => {
     if (num === '.' && amount.includes('.')) return
     if (amount.split('.')[1]?.length >= 2) return
@@ -25,7 +31,7 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
   }
 
   const handleContinue = () => {
-    if (amount && parseFloat(amount) > 0) {
+    if (isValidAmount) {
       onContinue(amount)
     }
   }
@@ -55,12 +61,12 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
             border: 'none',
             cursor: 'pointer',
             fontSize: '24px',
-            color: '#000000',
+            color: '#0A0A0A',
           }}
         >
           ✕
         </button>
-        <h2 style={{ fontSize: '20px', fontWeight: '600', margin: 0, color: '#000000' }}>Withdraw</h2>
+        <h2 style={{ fontSize: '20px', fontWeight: 600, margin: 0, color: '#0A0A0A' }}>Withdraw</h2>
         <div style={{ width: '40px' }} />
       </div>
 
@@ -78,17 +84,21 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
         <div
           style={{
             fontSize: '64px',
-            fontWeight: 'bold',
-            color: '#000000',
+            fontWeight: 700,
+            color: '#0A0A0A',
             minHeight: '80px',
             display: 'flex',
             alignItems: 'center',
+            letterSpacing: '-2px',
           }}
         >
           ${amount || '0'}
         </div>
-        <div style={{ fontSize: '14px', color: '#666666' }}>
-          Available: {formatUSD(maxBalance)}
+        <div style={{ fontSize: '14px', color: exceedsBalance ? '#dc2626' : '#404040' }}>
+          {exceedsBalance
+            ? `Insufficient balance. Maximum: ${formatUSD(maxBalance)}`
+            : `Available: ${formatUSD(maxBalance)}`
+          }
         </div>
       </div>
 
@@ -108,13 +118,16 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
             style={{
               padding: '20px',
               fontSize: '24px',
-              fontWeight: '500',
-              color: '#000000',
-              backgroundColor: '#F5F5F5',
+              fontWeight: 500,
+              color: '#0A0A0A',
+              backgroundColor: '#E8EFE9',
               border: 'none',
               borderRadius: '12px',
               cursor: 'pointer',
+              transition: 'background-color 0.2s',
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#d9e5db')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E8EFE9')}
           >
             {key}
           </button>
@@ -124,17 +137,24 @@ export const WithdrawAmountModal: React.FC<WithdrawAmountModalProps> = ({
       {/* Continue button */}
       <button
         onClick={handleContinue}
-        disabled={!amount || parseFloat(amount) <= 0}
+        disabled={!isValidAmount}
         style={{
           width: '100%',
-          padding: '18px',
-          fontSize: '18px',
-          fontWeight: '600',
+          padding: '16px',
+          fontSize: '16px',
+          fontWeight: 500,
           color: '#FFFFFF',
-          backgroundColor: amount && parseFloat(amount) > 0 ? 'rgb(32 78 65)' : '#E5E5E5',
+          backgroundColor: isValidAmount ? '#204E41' : '#a8a29e',
           border: 'none',
-          borderRadius: '28px',
-          cursor: amount && parseFloat(amount) > 0 ? 'pointer' : 'not-allowed',
+          borderRadius: '12px',
+          cursor: isValidAmount ? 'pointer' : 'not-allowed',
+          transition: 'background-color 0.2s',
+        }}
+        onMouseEnter={(e) => {
+          if (isValidAmount) e.currentTarget.style.backgroundColor = '#1a3f35'
+        }}
+        onMouseLeave={(e) => {
+          if (isValidAmount) e.currentTarget.style.backgroundColor = '#204E41'
         }}
       >
         Continue

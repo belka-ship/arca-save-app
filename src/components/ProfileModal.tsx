@@ -15,7 +15,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 }) => {
   const menuItems = [
     { icon: '💵', label: 'USDC address', action: onUSDCAddress },
-    { icon: '✉️', label: 'Email us', action: () => window.location.href = 'mailto:v@pikarevskis.com' },
+    { icon: '✉️', label: 'Email us', action: () => window.location.href = 'mailto:vpikarevskis@gmail.com' },
     { icon: '🚪', label: 'Logout', action: onLogout },
   ]
 
@@ -27,7 +27,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FAFAFA',
+        backgroundColor: '#FFFBF0',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -45,7 +45,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
           border: 'none',
           cursor: 'pointer',
           fontSize: '24px',
-          color: '#000000',
+          color: '#0A0A0A',
           marginBottom: '20px',
         }}
       >
@@ -57,14 +57,15 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         <h1
           style={{
             fontSize: '48px',
-            fontWeight: 'bold',
+            fontWeight: 700,
             margin: '0 0 8px 0',
-            color: '#000000',
+            color: '#0A0A0A',
+            letterSpacing: '-1px',
           }}
         >
           Profile
         </h1>
-        <div style={{ fontSize: '14px', color: '#666666' }}>
+        <div style={{ fontSize: '14px', color: '#404040' }}>
           {email || 'user@example.com'} · v1.0.36
         </div>
       </div>
@@ -83,15 +84,18 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               padding: '16px 0',
               background: 'none',
               border: 'none',
-              borderBottom: index < menuItems.length - 1 ? '1px solid #F0F0F0' : 'none',
+              borderBottom: index < menuItems.length - 1 ? '1px solid #E8EFE9' : 'none',
               cursor: 'pointer',
               fontSize: '16px',
-              color: '#000000',
+              color: '#0A0A0A',
               textAlign: 'left',
+              transition: 'color 0.2s',
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#204E41')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#0A0A0A')}
           >
             <span style={{ fontSize: '20px' }}>{item.icon}</span>
-            <span style={{ fontWeight: '500' }}>{item.label}</span>
+            <span style={{ fontWeight: 500 }}>{item.label}</span>
           </button>
         ))}
       </div>
