@@ -75,6 +75,9 @@ export const WalletInterface: React.FC = () => {
   // Track if initial load has happened
   const hasInitialized = useRef(false)
 
+  // Track last known USDC balance to detect new deposits
+  const lastKnownUsdcBalance = useRef<bigint>(BigInt(0))
+
   // Get user email
   const userEmail = user?.email?.address || user?.google?.email
 
@@ -115,13 +118,32 @@ export const WalletInterface: React.FC = () => {
     }
   }, [withdraw, withdrawAmount, queryBalances])
 
-  // Initial balance check when wallet is ready
+  // Initial balance check and polling for new deposits
   useEffect(() => {
-    if (walletsReady && walletAddress && !hasInitialized.current) {
+    if (!walletsReady || !walletAddress) return
+
+    // Initial check
+    if (!hasInitialized.current) {
       hasInitialized.current = true
       checkAndInvest()
     }
-  }, [walletsReady, walletAddress, checkAndInvest])
+
+    // Poll for new USDC deposits every 10 seconds
+    const pollInterval = setInterval(async () => {
+      const { usdcBalance } = await queryBalances()
+
+      // If new USDC detected (balance increased), auto-invest
+      if (usdcBalance > BigInt(0) && usdcBalance !== lastKnownUsdcBalance.current) {
+        lastKnownUsdcBalance.current = usdcBalance
+        const success = await investAll(usdcBalance)
+        if (success) {
+          await queryBalances()
+        }
+      }
+    }, 10000)
+
+    return () => clearInterval(pollInterval)
+  }, [walletsReady, walletAddress, checkAndInvest, queryBalances, investAll])
 
   // Close modals when navigating back
   const handleCloseWithdraw = useCallback(() => {
