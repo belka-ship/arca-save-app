@@ -30,7 +30,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FFFBF0',
+        backgroundColor: '#FAFAFA',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -86,8 +86,10 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             alignItems: 'center',
             gap: '8px',
             padding: '12px 16px',
-            backgroundColor: '#F5F5F5',
+            backgroundColor: copied ? '#E8F5E9' : '#F5F5F5',
             borderRadius: '12px',
+            transition: 'all 0.3s ease',
+            border: copied ? '1px solid #4CAF50' : '1px solid transparent',
           }}
         >
           <span
@@ -106,24 +108,55 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              color: copied ? 'rgb(32 78 65)' : '#666666',
+              color: copied ? '#4CAF50' : '#666666',
+              transition: 'all 0.2s ease',
+              transform: copied ? 'scale(1.1)' : 'scale(1)',
             }}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-            </svg>
+            {copied ? (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            ) : (
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            )}
           </button>
         </div>
+
+        {/* Copied feedback text */}
+        {copied && (
+          <div
+            style={{
+              fontSize: '14px',
+              color: '#4CAF50',
+              fontWeight: '500',
+              animation: 'fadeIn 0.3s ease',
+            }}
+          >
+            Address copied to clipboard!
+          </div>
+        )}
 
         {/* Disclaimers */}
         <div
@@ -174,7 +207,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               ✕
             </div>
             <p style={{ margin: 0, fontSize: '14px', color: '#000000' }}>
-              Sending tokens on other networks may result in permanent lost
+              Sending tokens on other networks may result in permanent loss
             </p>
           </div>
 
@@ -208,12 +241,15 @@ export const DepositModal: React.FC<DepositModalProps> = ({
           fontSize: '18px',
           fontWeight: '600',
           color: '#FFFFFF',
-          backgroundColor: 'rgb(32 78 65)',
+          backgroundColor: '#000000',
           border: 'none',
           borderRadius: '28px',
           cursor: 'pointer',
           marginTop: '32px',
+          transition: 'background-color 0.2s ease',
         }}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#000000')}
       >
         Close
       </button>

@@ -4,31 +4,19 @@ interface ProfileModalProps {
   email: string | undefined
   onClose: () => void
   onLogout: () => void
+  onUSDCAddress: () => void
 }
 
 export const ProfileModal: React.FC<ProfileModalProps> = ({
   email,
   onClose,
   onLogout,
+  onUSDCAddress,
 }) => {
   const menuItems = [
-    { icon: '👤', label: 'Account', action: () => {} },
-    { icon: '💵', label: 'USDC address', action: () => {} },
-    { icon: '📋', label: 'Transactions', action: () => {} },
-    { icon: '🛡️', label: 'Security', action: () => {} },
-    { icon: '🔔', label: 'Push notifications', action: () => {} },
+    { icon: '💵', label: 'USDC address', action: onUSDCAddress },
+    { icon: '✉️', label: 'Email us', action: () => window.location.href = 'mailto:v@pikarevskis.com' },
     { icon: '🚪', label: 'Logout', action: onLogout },
-  ]
-
-  const earnMoreItems = [
-    { icon: '👥', label: 'Refer a friend', action: () => {} },
-    { icon: '✓', label: 'Activate a code', action: () => {} },
-    { icon: '🔄', label: 'Auto deposit', action: () => {} },
-  ]
-
-  const supportItems = [
-    { icon: '✉️', label: 'Email us', action: () => {} },
-    { icon: '⭐', label: 'Like us? Rate us', action: () => {} },
   ]
 
   return (
@@ -39,7 +27,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#FFFBF0',
+        backgroundColor: '#FAFAFA',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
@@ -81,8 +69,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         </div>
       </div>
 
-      {/* Main menu items */}
-      <div style={{ marginBottom: '32px' }}>
+      {/* Menu items */}
+      <div>
         {menuItems.map((item, index) => (
           <button
             key={index}
@@ -96,84 +84,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               background: 'none',
               border: 'none',
               borderBottom: index < menuItems.length - 1 ? '1px solid #F0F0F0' : 'none',
-              cursor: 'pointer',
-              fontSize: '16px',
-              color: '#000000',
-              textAlign: 'left',
-            }}
-          >
-            <span style={{ fontSize: '20px' }}>{item.icon}</span>
-            <span style={{ fontWeight: '500' }}>{item.label}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Earn more section */}
-      <div style={{ marginBottom: '32px' }}>
-        <h3
-          style={{
-            fontSize: '14px',
-            fontWeight: '600',
-            color: '#666666',
-            margin: '0 0 16px 0',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
-          Earn more
-        </h3>
-        {earnMoreItems.map((item, index) => (
-          <button
-            key={index}
-            onClick={item.action}
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-              padding: '16px 0',
-              background: 'none',
-              border: 'none',
-              borderBottom: index < earnMoreItems.length - 1 ? '1px solid #F0F0F0' : 'none',
-              cursor: 'pointer',
-              fontSize: '16px',
-              color: '#000000',
-              textAlign: 'left',
-            }}
-          >
-            <span style={{ fontSize: '20px' }}>{item.icon}</span>
-            <span style={{ fontWeight: '500' }}>{item.label}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Support section */}
-      <div>
-        <h3
-          style={{
-            fontSize: '14px',
-            fontWeight: '600',
-            color: '#666666',
-            margin: '0 0 16px 0',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-          }}
-        >
-          Support
-        </h3>
-        {supportItems.map((item, index) => (
-          <button
-            key={index}
-            onClick={item.action}
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-              padding: '16px 0',
-              background: 'none',
-              border: 'none',
-              borderBottom: index < supportItems.length - 1 ? '1px solid #F0F0F0' : 'none',
               cursor: 'pointer',
               fontSize: '16px',
               color: '#000000',

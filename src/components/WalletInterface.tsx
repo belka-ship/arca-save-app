@@ -3,6 +3,7 @@ import { usePrivy, useWallets, useSendTransaction } from '@privy-io/react-auth'
 import type { Address } from 'viem'
 import { NewHeader } from './NewHeader'
 import { NewBalanceDisplay } from './NewBalanceDisplay'
+import { DepositOptionsModal } from './DepositOptionsModal'
 import { DepositModal } from './DepositModal'
 import { WithdrawAmountModal } from './WithdrawAmountModal'
 import { WithdrawAddressModal } from './WithdrawAddressModal'
@@ -66,6 +67,7 @@ export const WalletInterface: React.FC = () => {
   const { isWithdrawing, withdraw } = useWithdraw(walletAddress, sendTransaction)
 
   // Modal states
+  const [showDepositOptions, setShowDepositOptions] = useState(false)
   const [showDeposit, setShowDeposit] = useState(false)
   const [showWithdrawAmount, setShowWithdrawAmount] = useState(false)
   const [showWithdrawAddress, setShowWithdrawAddress] = useState(false)
@@ -140,7 +142,7 @@ export const WalletInterface: React.FC = () => {
           justifyContent: 'center',
           height: '100%',
           width: '100%',
-          backgroundColor: '#FFFBF0',
+          backgroundColor: '#FAFAFA',
         }}
       >
         <LoadingSpinner size="large" />
@@ -160,7 +162,7 @@ export const WalletInterface: React.FC = () => {
           justifyContent: 'center',
           height: '100%',
           width: '100%',
-          backgroundColor: '#FFFBF0',
+          backgroundColor: '#FAFAFA',
           position: 'relative',
         }}
       >
@@ -170,13 +172,27 @@ export const WalletInterface: React.FC = () => {
           totalValueUSD={totalValueUSD}
           earnedAmount={BigInt(0)}
           isLoading={isLoading}
-          onDeposit={() => setShowDeposit(true)}
+          onDeposit={() => setShowDepositOptions(true)}
           onWithdraw={() => setShowWithdrawAmount(true)}
           onRefresh={checkAndInvest}
         />
       </div>
 
       {/* Modals */}
+      {showDepositOptions && (
+        <DepositOptionsModal
+          onClose={() => setShowDepositOptions(false)}
+          onCoinbase={() => {
+            window.open('https://www.coinbase.com/price/usdc/', '_blank')
+            setShowDepositOptions(false)
+          }}
+          onUSDCDeposit={() => {
+            setShowDepositOptions(false)
+            setShowDeposit(true)
+          }}
+        />
+      )}
+
       {showDeposit && (
         <DepositModal
           walletAddress={walletAddress}
@@ -206,6 +222,10 @@ export const WalletInterface: React.FC = () => {
           email={userEmail}
           onClose={() => setShowProfile(false)}
           onLogout={logout}
+          onUSDCAddress={() => {
+            setShowProfile(false)
+            setShowDeposit(true)
+          }}
         />
       )}
     </>

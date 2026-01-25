@@ -24,18 +24,19 @@ const App: React.FC = () => {
     return (
       <div style={styles.container}>
         <div style={styles.loginContainer}>
-          <h1 style={styles.title}>StableSave</h1>
+          <h1 style={styles.logo}>ArcaSave.</h1>
+          <h2 style={styles.headline}>Earn up to 7.4% APY</h2>
           <p style={styles.subtitle}>
-            Automatic USDC savings on Base
+            Zero fees. No minimum deposit. Withdraw anytime.
           </p>
           <button
             onClick={login}
             style={styles.loginButton}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgb(25 65 53)'
+              e.currentTarget.style.backgroundColor = '#1a1a1a'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgb(32 78 65)'
+              e.currentTarget.style.backgroundColor = '#000000'
             }}
           >
             Get Started
@@ -57,40 +58,54 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#FFFBF0',
+    backgroundColor: '#FAFAFA',
     padding: '20px',
   },
   loginContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '24px',
+    gap: '16px',
     textAlign: 'center',
+    maxWidth: '400px',
+    width: '100%',
+    padding: '0 20px',
   },
-  title: {
-    fontSize: '32px',
-    fontWeight: 'bold',
+  logo: {
+    fontSize: '28px',
+    fontWeight: '600',
     color: '#000000',
     margin: 0,
     letterSpacing: '-0.5px',
   },
+  headline: {
+    fontSize: '48px',
+    fontWeight: '700',
+    color: '#000000',
+    margin: '24px 0 0 0',
+    letterSpacing: '-1px',
+    lineHeight: '1.1',
+  },
   subtitle: {
-    fontSize: '16px',
+    fontSize: '18px',
     color: '#666666',
-    margin: 0,
-    maxWidth: '280px',
+    margin: '8px 0 0 0',
+    maxWidth: '320px',
+    lineHeight: '1.5',
   },
   loginButton: {
-    padding: '14px 32px',
-    fontSize: '16px',
+    padding: '16px 48px',
+    fontSize: '18px',
     fontWeight: '600',
     color: '#FFFFFF',
-    backgroundColor: 'rgb(32 78 65)',
+    backgroundColor: '#000000',
     border: 'none',
-    borderRadius: '24px',
+    borderRadius: '50px',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
-    marginTop: '8px',
+    marginTop: '24px',
+    width: '100%',
+    maxWidth: '280px',
   },
 }
 

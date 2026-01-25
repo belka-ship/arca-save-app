@@ -9,14 +9,15 @@ export const NewHeader: React.FC<NewHeaderProps> = ({ onProfileClick }) => {
     <header
       style={{
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         padding: '20px',
         width: '100%',
+        maxWidth: '500px',
         position: 'absolute',
         top: 0,
-        left: 0,
-        right: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
       }}
     >
       <button
@@ -46,21 +47,6 @@ export const NewHeader: React.FC<NewHeaderProps> = ({ onProfileClick }) => {
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
-      </button>
-
-      <button
-        style={{
-          padding: '8px 16px',
-          fontSize: '14px',
-          color: '#FFFFFF',
-          backgroundColor: 'rgb(32 78 65)',
-          border: 'none',
-          borderRadius: '20px',
-          cursor: 'pointer',
-          fontWeight: '500',
-        }}
-      >
-        Earn more
       </button>
     </header>
   )

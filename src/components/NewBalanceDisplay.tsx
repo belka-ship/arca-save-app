@@ -66,7 +66,7 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
         <span style={{ fontSize: '16px', color: '#666666' }}>
           {formatUSD(earnedAmount)}
         </span>
-        <span style={{ fontSize: '16px', color: 'rgb(32 78 65)', marginLeft: '4px' }}>
+        <span style={{ fontSize: '16px', color: '#000000', marginLeft: '4px' }}>
           earned
         </span>
       </div>
@@ -110,8 +110,8 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             }}
             onMouseEnter={(e) => {
               if (!isRefreshing && !isLoading) {
-                e.currentTarget.style.color = 'rgb(32 78 65)'
-                e.currentTarget.style.backgroundColor = 'rgba(32, 78, 65, 0.1)'
+                e.currentTarget.style.color = '#000000'
+                e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.1)'
               }
             }}
             onMouseLeave={(e) => {
@@ -173,14 +173,14 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             fontSize: '18px',
             fontWeight: '600',
             color: '#FFFFFF',
-            backgroundColor: 'rgb(32 78 65)',
+            backgroundColor: '#000000',
             border: 'none',
             borderRadius: '28px',
             cursor: 'pointer',
             transition: 'background-color 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgb(25 65 53)')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgb(32 78 65)')}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#000000')}
         >
           Deposit
         </button>
