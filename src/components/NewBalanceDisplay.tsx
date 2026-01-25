@@ -1,5 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { formatUSD } from '../utils/formatters'
+
+const RefreshIcon: React.FC<{ spinning?: boolean }> = ({ spinning }) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{
+      animation: spinning ? 'spin 1s linear infinite' : 'none',
+    }}
+  >
+    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+    <path d="M21 3v5h-5" />
+  </svg>
+)
 
 interface NewBalanceDisplayProps {
   totalValueUSD: bigint
@@ -7,6 +26,7 @@ interface NewBalanceDisplayProps {
   isLoading: boolean
   onDeposit: () => void
   onWithdraw: () => void
+  onRefresh: () => Promise<void>
 }
 
 export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
@@ -15,7 +35,19 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
   isLoading,
   onDeposit,
   onWithdraw,
+  onRefresh,
 }) => {
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const handleRefresh = async () => {
+    if (isRefreshing || isLoading) return
+    setIsRefreshing(true)
+    try {
+      await onRefresh()
+    } finally {
+      setIsRefreshing(false)
+    }
+  }
   return (
     <div
       style={{
@@ -43,14 +75,53 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
       <div style={{ textAlign: 'center' }}>
         <div
           style={{
-            fontSize: '72px',
-            fontWeight: 'bold',
-            color: '#000000',
-            letterSpacing: '-2px',
-            lineHeight: '1',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
           }}
         >
-          {formatUSD(totalValueUSD)}
+          <div
+            style={{
+              fontSize: '72px',
+              fontWeight: 'bold',
+              color: '#000000',
+              letterSpacing: '-2px',
+              lineHeight: '1',
+            }}
+          >
+            {formatUSD(totalValueUSD)}
+          </div>
+          <button
+            onClick={handleRefresh}
+            disabled={isRefreshing || isLoading}
+            style={{
+              padding: '8px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '50%',
+              cursor: isRefreshing || isLoading ? 'not-allowed' : 'pointer',
+              color: '#666666',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'color 0.2s, background-color 0.2s',
+              marginTop: '8px',
+            }}
+            onMouseEnter={(e) => {
+              if (!isRefreshing && !isLoading) {
+                e.currentTarget.style.color = 'rgb(32 78 65)'
+                e.currentTarget.style.backgroundColor = 'rgba(32, 78, 65, 0.1)'
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#666666'
+              e.currentTarget.style.backgroundColor = 'transparent'
+            }}
+            title="Refresh balance"
+          >
+            <RefreshIcon spinning={isRefreshing} />
+          </button>
         </div>
         <div
           style={{
