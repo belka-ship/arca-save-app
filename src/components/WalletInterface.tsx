@@ -12,6 +12,7 @@ import { LoadingSpinner } from './LoadingSpinner'
 import { useBalance } from '../hooks/useBalance'
 import { useAutoInvest } from '../hooks/useAutoInvest'
 import { useWithdraw } from '../hooks/useWithdraw'
+import { useRealEarnings } from '../hooks/useRealEarnings'
 import { CHAIN_CONFIG } from '../lib/privy'
 
 /**
@@ -66,6 +67,9 @@ export const WalletInterface: React.FC = () => {
   const { isInvesting, investAll } = useAutoInvest(walletAddress, sendTransaction)
   const { isWithdrawing, withdraw } = useWithdraw(walletAddress, sendTransaction)
 
+  // Real earnings from BaseScan transaction history
+  const { netEarnings, isLoading: isLoadingEarnings, refresh: refreshEarnings } = useRealEarnings(walletAddress)
+
   // Modal states
   const [showDepositOptions, setShowDepositOptions] = useState(false)
   const [showDeposit, setShowDeposit] = useState(false)
@@ -92,11 +96,15 @@ export const WalletInterface: React.FC = () => {
     if (balance > BigInt(0)) {
       const success = await investAll(balance)
       if (success) {
-        // Refresh balances after investment
+        // Refresh balances and earnings after investment
         await queryBalances()
+        await refreshEarnings()
       }
+    } else {
+      // Just refresh earnings if no new USDC to invest
+      await refreshEarnings()
     }
-  }, [walletAddress, queryBalances, investAll])
+  }, [walletAddress, queryBalances, investAll, refreshEarnings])
 
   /**
    * Handle withdraw flow
@@ -150,7 +158,7 @@ export const WalletInterface: React.FC = () => {
     )
   }
 
-  const isLoading = isLoadingBalance || isInvesting || isWithdrawing
+  const isLoading = isLoadingBalance || isInvesting || isWithdrawing || isLoadingEarnings
 
   return (
     <>
@@ -170,7 +178,7 @@ export const WalletInterface: React.FC = () => {
 
         <NewBalanceDisplay
           totalValueUSD={totalValueUSD}
-          earnedAmount={BigInt(0)}
+          earnedAmount={netEarnings}
           isLoading={isLoading}
           onDeposit={() => setShowDepositOptions(true)}
           onWithdraw={() => setShowWithdrawAmount(true)}

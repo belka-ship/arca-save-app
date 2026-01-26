@@ -14,8 +14,8 @@ export const privyConfig: PrivyClientConfig = {
   
   // Appearance
   appearance: {
-    theme: 'dark',
-    accentColor: '#FFFFFF',
+    theme: 'light',
+    accentColor: '#676FFF',
     logo: undefined,
   },
   

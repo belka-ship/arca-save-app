@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { formatUSD, formatEarnings } from '../utils/formatters'
-import { useEarningsTicker } from '../hooks/useEarningsTicker'
 
 const RefreshIcon: React.FC<{ spinning?: boolean }> = ({ spinning }) => (
   <svg
@@ -32,22 +31,13 @@ interface NewBalanceDisplayProps {
 
 export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
   totalValueUSD,
-  earnedAmount: _earnedAmount,
+  earnedAmount,
   isLoading,
   onDeposit,
   onWithdraw,
   onRefresh,
 }) => {
   const [isRefreshing, setIsRefreshing] = useState(false)
-  
-  // Use live earnings ticker with 7.4% APY
-  const liveEarnings = useEarningsTicker(totalValueUSD, 7.4)
-  
-  // Debug log to see the earnings value
-  console.log('NewBalanceDisplay - totalValueUSD:', totalValueUSD.toString(), 'liveEarnings:', liveEarnings.toString())
-  
-  // Test formatting with a manual small value
-  console.log('Test formatEarnings with small value:', formatEarnings(BigInt(1000))) // Should show $0.001
 
   const handleRefresh = async () => {
     if (isRefreshing || isLoading) return
@@ -73,11 +63,11 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
     >
       {/* Earned amount */}
       <div style={{ textAlign: 'center' }}>
-        <span style={{ fontSize: '16px', color: '#204E41', fontWeight: 500 }}>
-          {formatEarnings(liveEarnings)}
+        <span style={{ fontSize: '16px', color: earnedAmount >= BigInt(0) ? '#204E41' : '#dc2626', fontWeight: 500 }}>
+          {formatEarnings(earnedAmount)}
         </span>
         <span style={{ fontSize: '16px', color: '#404040', marginLeft: '4px' }}>
-          earned
+          {earnedAmount >= BigInt(0) ? 'earned' : 'loss'}
         </span>
       </div>
 
@@ -140,7 +130,7 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             marginTop: '12px',
           }}
         >
-          Current rate: <span style={{ fontWeight: 600, color: '#204E41' }}>7.4% APY</span>
+          Current rate: <span style={{ fontWeight: 600, color: '#204E41' }}>4.3% APY</span>
         </div>
       </div>
 

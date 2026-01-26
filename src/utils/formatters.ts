@@ -16,15 +16,32 @@ export function formatUSD(amount: bigint): string {
 }
 
 /**
- * Format earnings with many decimal places to show small increments
+ * Format earnings with appropriate decimal places
+ * Shows more decimals for small values, fewer for large values
  * @param amount - Amount in base units (6 decimals for USDC)
- * @returns Formatted string like "$0.0001234567"
+ * @returns Formatted string like "$0.12" or "$1,234.56"
  */
 export function formatEarnings(amount: bigint): string {
   const value = Number(amount) / Math.pow(10, USDC_DECIMALS)
-  
-  // Always show up to 10 decimal places for earnings
-  return `$${value.toFixed(10)}`
+  const absValue = Math.abs(value)
+  const sign = value < 0 ? '-' : ''
+
+  // Determine decimal places based on magnitude
+  let decimals = 2
+  if (absValue > 0 && absValue < 0.01) {
+    decimals = 4
+  } else if (absValue >= 0.01 && absValue < 1) {
+    decimals = 3
+  }
+
+  const formatted = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(absValue)
+
+  return sign + formatted
 }
 
 /**
