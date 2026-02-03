@@ -11,17 +11,11 @@ export const DepositModal: React.FC<DepositModalProps> = ({
   onClose,
 }) => {
   const [copied, setCopied] = useState(false)
-  const [isAnimating, setIsAnimating] = useState(false)
 
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(walletAddress)
-      setIsAnimating(true)
       setCopied(true)
-
-      // Reset animation state after the animation completes
-      setTimeout(() => setIsAnimating(false), 300)
-      // Reset copied state after showing feedback
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
@@ -94,15 +88,12 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             alignItems: 'center',
             gap: '12px',
             padding: '14px 20px',
-            backgroundColor: copied ? '#E8F5E9' : 'rgba(255, 255, 255, 0.9)',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
             borderRadius: '16px',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: 'border-color 0.2s ease',
             border: copied ? '1.5px solid #204E41' : '1.5px solid #E5E5E5',
             cursor: 'pointer',
-            boxShadow: copied
-              ? '0 0 0 4px rgba(32, 78, 65, 0.12)'
-              : '0 2px 8px rgba(0, 0, 0, 0.04)',
-            transform: isAnimating ? 'scale(0.97)' : 'scale(1)',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
           }}
         >
           <span
@@ -124,8 +115,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              transform: isAnimating ? 'scale(1.15)' : 'scale(1)',
+              transition: 'background-color 0.2s ease',
             }}
           >
             {copied ? (
@@ -138,9 +128,6 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                style={{
-                  animation: copied ? 'checkmark 0.3s ease-out' : 'none',
-                }}
               >
                 <polyline points="20 6 9 17 4 12" />
               </svg>
@@ -161,25 +148,6 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             )}
           </div>
         </button>
-
-        {/* CSS keyframes for checkmark animation */}
-        <style>
-          {`
-            @keyframes checkmark {
-              0% {
-                transform: scale(0) rotate(-45deg);
-                opacity: 0;
-              }
-              50% {
-                transform: scale(1.2) rotate(0deg);
-              }
-              100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-              }
-            }
-          `}
-        </style>
 
         {/* Disclaimers */}
         <div
