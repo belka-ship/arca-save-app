@@ -90,8 +90,7 @@ export const DepositModal: React.FC<DepositModalProps> = ({
             padding: '14px 20px',
             backgroundColor: 'rgba(255, 255, 255, 0.9)',
             borderRadius: '16px',
-            transition: 'border-color 0.2s ease',
-            border: copied ? '1.5px solid #204E41' : '1.5px solid #E5E5E5',
+            border: '1.5px solid #E5E5E5',
             cursor: 'pointer',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
           }}
@@ -106,47 +105,20 @@ export const DepositModal: React.FC<DepositModalProps> = ({
           >
             {truncateAddress(walletAddress)}
           </span>
-          <div
-            style={{
-              width: '32px',
-              height: '32px',
-              borderRadius: '8px',
-              backgroundColor: copied ? '#204E41' : '#F5F5F5',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'background-color 0.2s ease',
-            }}
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={copied ? '#204E41' : '#a8a29e'}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ transition: 'stroke 0.15s ease' }}
           >
-            {copied ? (
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#FFFFFF"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            ) : (
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#737373"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-              </svg>
-            )}
-          </div>
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
         </button>
 
         {/* Disclaimers */}
