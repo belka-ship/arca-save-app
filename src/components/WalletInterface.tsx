@@ -180,7 +180,10 @@ export const WalletInterface: React.FC = () => {
           totalValueUSD={totalValueUSD}
           earnedAmount={netEarnings}
           isLoading={isLoading}
-          onDeposit={() => setShowDepositOptions(true)}
+          onDeposit={() => {
+            setShowDeposit(false)
+            setShowDepositOptions(true)
+          }}
           onWithdraw={() => setShowWithdrawAmount(true)}
           onRefresh={checkAndInvest}
         />
