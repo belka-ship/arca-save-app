@@ -11,11 +11,17 @@ export const DepositModal: React.FC<DepositModalProps> = ({
   onClose,
 }) => {
   const [copied, setCopied] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(walletAddress)
+      setIsAnimating(true)
       setCopied(true)
+
+      // Reset animation state after the animation completes
+      setTimeout(() => setIsAnimating(false), 300)
+      // Reset copied state after showing feedback
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
@@ -81,16 +87,22 @@ export const DepositModal: React.FC<DepositModalProps> = ({
         </h2>
 
         {/* Address with copy */}
-        <div
+        <button
+          onClick={handleCopy}
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            padding: '12px 16px',
-            backgroundColor: copied ? '#E8EFE9' : 'rgba(255, 255, 255, 0.8)',
-            borderRadius: '12px',
-            transition: 'all 0.3s ease',
-            border: copied ? '1px solid #204E41' : '1px solid #D4D4D4',
+            gap: '12px',
+            padding: '14px 20px',
+            backgroundColor: copied ? '#E8F5E9' : 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '16px',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            border: copied ? '1.5px solid #204E41' : '1.5px solid #E5E5E5',
+            cursor: 'pointer',
+            boxShadow: copied
+              ? '0 0 0 4px rgba(32, 78, 65, 0.12)'
+              : '0 2px 8px rgba(0, 0, 0, 0.04)',
+            transform: isAnimating ? 'scale(0.97)' : 'scale(1)',
           }}
         >
           <span
@@ -98,42 +110,47 @@ export const DepositModal: React.FC<DepositModalProps> = ({
               fontSize: '16px',
               fontFamily: 'monospace',
               color: '#0A0A0A',
+              letterSpacing: '0.5px',
             }}
           >
             {truncateAddress(walletAddress)}
           </span>
-          <button
-            onClick={handleCopy}
+          <div
             style={{
-              padding: '4px',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: copied ? '#204E41' : '#a8a29e',
-              transition: 'all 0.2s ease',
-              transform: copied ? 'scale(1.1)' : 'scale(1)',
+              width: '32px',
+              height: '32px',
+              borderRadius: '8px',
+              backgroundColor: copied ? '#204E41' : '#F5F5F5',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              transform: isAnimating ? 'scale(1.15)' : 'scale(1)',
             }}
           >
             {copied ? (
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
+                stroke="#FFFFFF"
+                strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                style={{
+                  animation: copied ? 'checkmark 0.3s ease-out' : 'none',
+                }}
               >
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             ) : (
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="currentColor"
+                stroke="#737373"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -142,22 +159,27 @@ export const DepositModal: React.FC<DepositModalProps> = ({
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
               </svg>
             )}
-          </button>
-        </div>
-
-        {/* Copied feedback text */}
-        {copied && (
-          <div
-            style={{
-              fontSize: '14px',
-              color: '#204E41',
-              fontWeight: 500,
-              animation: 'fadeIn 0.3s ease',
-            }}
-          >
-            Address copied!
           </div>
-        )}
+        </button>
+
+        {/* CSS keyframes for checkmark animation */}
+        <style>
+          {`
+            @keyframes checkmark {
+              0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+              }
+              50% {
+                transform: scale(1.2) rotate(0deg);
+              }
+              100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+              }
+            }
+          `}
+        </style>
 
         {/* Disclaimers */}
         <div
