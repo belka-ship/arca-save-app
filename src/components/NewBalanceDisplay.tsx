@@ -130,7 +130,7 @@ export const NewBalanceDisplay: React.FC<NewBalanceDisplayProps> = ({
             marginTop: '12px',
           }}
         >
-          Current rate: <span style={{ fontWeight: 600, color: '#204E41' }}>4.3% APY</span>
+          Current rate: <span style={{ fontWeight: 600, color: '#204E41' }}>4.2% APY</span>
         </div>
       </div>
 
